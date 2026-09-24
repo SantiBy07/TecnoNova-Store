@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TecnoNova Store - Tecnología, computadores, celulares, accesorios y entretenimiento.">
+<title>TecnoNova Store | Tecnología</title>
+<style>
+:root{--blue:#155eef;--blue2:#0b3aa4;--ink:#101828;--muted:#667085;--bg:#f7f8fa;--white:#fff;--line:#eaecf0;--green:#12b76a;--danger:#d92d20}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit}
+a{text-decoration:none;color:inherit}
+.topbar{background:#0b1220;color:#d0d5dd;font-size:13px}
+.topbar .wrap{max-width:1240px;margin:auto;padding:9px 20px;display:flex;justify-content:space-between}
+.header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.header-wrap{max-width:1240px;margin:auto;padding:15px 20px;display:flex;align-items:center;gap:22px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;font-size:22px;white-space:nowrap}
+.logo-mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--blue),#53b1fd);display:grid;place-items:center;color:white;font-weight:900}
+.logo span{color:var(--blue)}
+.search{flex:1;display:flex;max-width:650px;margin:auto}
+.search input{width:100%;border:1px solid #d0d5dd;border-right:0;border-radius:10px 0 0 10px;padding:12px 14px;outline:none}
+.search button{border:0;background:var(--blue);color:#fff;padding:0 18px;border-radius:0 10px 10px 0;cursor:pointer}
+.header-actions{display:flex;gap:10px}
+.icon-btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 13px;cursor:pointer}
+.cart-count{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:50%;background:#f04438;color:#fff;font-size:12px;margin-left:4px}
+.nav{background:#fff;border-bottom:1px solid var(--line)}
+.nav-wrap{max-width:1240px;margin:auto;padding:0 20px;display:flex;gap:25px}
+.nav a{padding:13px 0;color:#344054;font-size:14px;font-weight:700}
+.nav a:hover{color:var(--blue)}
+.hero{background:linear-gradient(110deg,#0b1220 0%,#123b9b 58%,#155eef 100%);color:#fff}
+.hero-wrap{max-width:1240px;margin:auto;padding:62px 20px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px}
+.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.02;margin:0 0 18px;letter-spacing:-1.8px}
+.hero p{color:#d0d5dd;font-size:17px;line-height:1.6;max-width:620px}
+.hero .cta{display:inline-block;margin-top:12px;background:#fff;color:#0b3aa4;padding:13px 19px;border-radius:10px;font-weight:800}
+.hero-card{background:#ffffff12;border:1px solid #ffffff26;border-radius:24px;padding:28px;backdrop-filter:blur(5px)}
+.hero-icons{font-size:58px;letter-spacing:8px;margin-bottom:8px}
+.section{max-width:1240px;margin:auto;padding:34px 20px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:20px}
+.section-head h2{margin:0;font-size:28px}
+.section-head p{margin:5px 0 0;color:var(--muted)}
+.categories{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:10px}
+.cat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px;font-weight:800;cursor:pointer;text-align:center}
+.cat:hover{border-color:#84adff;color:var(--blue)}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:.18s;box-shadow:0 4px 14px #10182808}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px #10182812}
+.imgbox{height:235px;background:#fff;display:grid;place-items:center;padding:18px;position:relative}
+.imgbox img{width:100%;height:100%;object-fit:contain}
+.badge{position:absolute;left:13px;top:13px;background:#ecfdf3;color:#027a48;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800}
+.info{padding:16px;display:flex;flex-direction:column;flex:1}
+.brand{font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+.card h3{font-size:16px;line-height:1.35;margin:7px 0 8px;min-height:44px}
+.spec{font-size:12px;color:#667085;line-height:1.45;min-height:35px}
+.price{font-size:21px;font-weight:900;margin-top:12px}
+.old{font-size:12px;color:#98a2b3;text-decoration:line-through;margin-top:3px}
+.card-actions{display:flex;gap:8px;margin-top:14px}
+.buy{flex:1;border:0;background:var(--blue);color:#fff;border-radius:9px;padding:11px;font-weight:800;cursor:pointer}
+.buy:hover{background:var(--blue2)}
+.detail{border:1px solid #d0d5dd;background:#fff;border-radius:9px;padding:10px 12px;cursor:pointer}
+.note{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;color:#475467;font-size:13px;line-height:1.5}
+footer{background:#0b1220;color:#98a2b3;margin-top:35px}
+.footer-wrap{max-width:1240px;margin:auto;padding:34px 20px;display:flex;justify-content:space-between;gap:25px}
+footer strong{color:#fff}
+.overlay{position:fixed;inset:0;background:#0008;display:none;z-index:100}
+.overlay.open{display:block}
+.drawer{position:absolute;right:0;top:0;width:min(440px,100%);height:100%;background:#fff;display:flex;flex-direction:column}
+.drawer-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.close{border:0;background:#f2f4f7;border-radius:8px;padding:8px 11px;cursor:pointer}
+.cart-list{padding:18px;overflow:auto;flex:1}
+.empty{text-align:center;color:var(--muted);padding:55px 20px}
+.cart-item{border:1px solid var(--line);border-radius:12px;padding:13px;margin-bottom:12px}
+.cart-top{display:flex;justify-content:space-between;gap:10px}
+.cart-name{font-weight:800}
+.remove{border:0;background:none;color:var(--danger);cursor:pointer}
+.qty{display:flex;align-items:center;gap:9px;margin-top:10px}
+.qty button{width:28px;height:28px;border:1px solid var(--line);background:#fff;border-radius:7px;cursor:pointer}
+.cart-foot{border-top:1px solid var(--line);padding:18px}
+.total{display:flex;justify-content:space-between;font-size:20px;font-weight:900;margin-bottom:13px}
+.checkout{width:100%;border:0;background:var(--green);color:#fff;border-radius:10px;padding:13px;font-weight:900;cursor:pointer}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;z-index:120;padding:20px}
+.modal.open{display:flex}
+.modal-card{width:min(650px,100%);background:#fff;border-radius:18px;padding:24px;max-height:90vh;overflow:auto}
+.modal-card h2{margin-top:0}
+.product-detail{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.product-detail img{width:100%;height:300px;object-fit:contain;border:1px solid var(--line);border-radius:12px}
+.form{display:grid;gap:12px}
+.form label{font-size:13px;font-weight:800}
+.form input,.form select{width:100%;border:1px solid #d0d5dd;border-radius:8px;padding:11px;outline:none}
+.actions{display:flex;gap:10px;margin-top:15px}
+.actions button{flex:1;padding:12px;border-radius:9px;font-weight:800;cursor:pointer}
+.cancel{border:1px solid #d0d5dd;background:#fff}
+.confirm{border:0;background:var(--blue);color:#fff}
+@media(max-width:1000px){.products{grid-template-columns:repeat(3,1fr)}.hero-wrap{grid-template-columns:1fr}.hero-card{display:none}.categories{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.header-wrap{flex-wrap:wrap}.search{order:3;flex-basis:100%}.products{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:repeat(2,1fr)}.nav-wrap{overflow:auto}.footer-wrap{flex-direction:column}}
+@media(max-width:470px){.products{grid-template-columns:1fr}.categories{grid-template-columns:1fr 1fr}.section{padding:25px 14px}.topbar .wrap{padding:8px 14px}.header-wrap{padding:12px 14px}.imgbox{height:260px}}
+
+/* --- TecnoNova visual update: logo + realistic hero --- */
+.logo-image{display:block;width:176px;height:58px;object-fit:contain;object-position:center;background:#000;border-radius:7px}
+.header{background:#05080d;border-bottom:1px solid #202733}
+.header-wrap{min-height:82px}
+.header .search input{background:#fff}
+.header-actions .icon-btn{background:#05080d;color:#fff;border-color:#344054}
+.nav{background:#fff}
+.hero{background:radial-gradient(circle at 78% 45%,#0c4fc4 0,#082b73 24%,#050b16 65%,#03060b 100%);overflow:hidden}
+.hero-wrap{min-height:355px;padding-top:48px;padding-bottom:48px}
+.eyebrow{font-size:14px;letter-spacing:2px;font-weight:800;color:#b2ddff;margin-bottom:12px}
+.hero h1{max-width:620px}
+.hero-showcase{height:315px;position:relative;overflow:hidden}
+.hero-showcase .glow{position:absolute;width:390px;height:260px;right:15px;top:25px;background:#1677ff55;filter:blur(35px);border-radius:50%}
+.hero-device{position:absolute;z-index:2;filter:drop-shadow(0 20px 22px #0008)}
+.hero-device img{width:100%;height:100%;object-fit:contain}
+.hero-laptop{width:275px;height:205px;right:210px;bottom:30px}
+.hero-monitor{width:235px;height:190px;right:25px;top:20px}
+.hero-phone{width:95px;height:180px;right:115px;bottom:32px}
+.hero-console{width:110px;height:75px;right:10px;bottom:15px;display:grid;place-items:center;font-size:62px}
+.benefits{background:#fff;border-bottom:1px solid var(--line)}
+.benefits-wrap{max-width:1240px;margin:auto;padding:16px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.benefit{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:13px;background:#fff}
+.benefit>span{font-size:25px;color:var(--blue);font-weight:900;width:34px;text-align:center}
+.benefit strong{display:block;font-size:14px}
+.benefit small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+@media(max-width:1000px){.benefits-wrap{grid-template-columns:repeat(2,1fr)}.hero-showcase{display:none}}
+@media(max-width:720px){.logo-image{width:145px;height:52px}.benefits-wrap{grid-template-columns:1fr 1fr}}
+@media(max-width:470px){.benefits-wrap{grid-template-columns:1fr}.logo-image{width:132px;height:48px}}
+
+
+/* Sección institucional */
+.institutional{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.institutional-wrap{max-width:1240px;margin:auto;padding:55px 20px}
+.institutional-head{text-align:center;margin-bottom:32px}
+.institutional-head .eyebrow{color:var(--blue);font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
+.institutional-head h2{font-size:30px;margin:8px 0 10px}
+.institutional-head p{color:var(--muted);max-width:720px;margin:auto;line-height:1.6}
+.institutional-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.institutional-card{border:1px solid var(--line);border-radius:16px;padding:25px;background:var(--bg);box-shadow:0 5px 18px rgba(16,24,40,.05)}
+.institutional-card .icon{font-size:28px;margin-bottom:10px}
+.institutional-card h3{margin:0 0 10px;font-size:20px}
+.institutional-card p{margin:0;color:#475467;line-height:1.7;font-size:14px}
+.objectives{margin-top:18px;border:1px solid var(--line);border-radius:16px;padding:25px;background:#fff}
+.objectives h3{margin:0 0 14px;font-size:20px}
+.objectives p{color:#475467;line-height:1.7;font-size:14px}
+.objectives ol{margin:12px 0 0;padding-left:22px;color:#475467;line-height:1.7;font-size:14px}
+@media(max-width:800px){.institutional-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap"><span>Compra fácil y segura</span><span>Precios en pesos colombianos (COP)</span></div></div>
+
+<header class="header">
+  <div class="header-wrap">
+    <div class="search">
+      <input id="search" placeholder="¿Qué estás buscando?" oninput="filterProducts()">
+      <button onclick="filterProducts()">🔎</button>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" onclick="openCart()">🛒 <span id="cartCount" class="cart-count">0</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav"><div class="nav-wrap">
+  <a href="#catalogo">Todos</a><a href="#nosotros">Nosotros</a><a href="#computadores">Computadores</a><a href="#celulares">Celulares</a><a href="#perifericos">Periféricos</a><a href="#gaming">Gaming</a>
+</div></nav>
+
+<section class="hero">
+  <div class="hero-wrap">
+    <div>
+      <div class="eyebrow">TECNOLOGÍA QUE SE ADAPTA A TI</div>
+      <h1>Conecta con la tecnología que necesitas.</h1>
+      <p>Computadores, smartphones, periféricos y entretenimiento de marcas reconocidas, reunidos en un solo lugar.</p>
+      <a class="cta" href="#catalogo">Ver productos</a>
+    </div>
+  </div>
+</section>
+<section class="benefits">
+  <div class="benefits-wrap">
+    <div class="benefit"><span>💳</span><div><strong>Compra fácil</strong><small>Proceso de compra sencillo</small></div></div>
+    <div class="benefit"><span>✓</span><div><strong>Marcas reconocidas</strong><small>Productos de referencia</small></div></div>
+    <div class="benefit"><span>◉</span><div><strong>Atención personalizada</strong><small>Te ayudamos a elegir</small></div></div>
+    <div class="benefit"><span>↩</span><div><strong>Compra segura</strong><small>Protección de tus datos</small></div></div>
+  </div>
+</section>
+
+<section class="section" id="catalogo">
+  <div class="section-head"><div><h2>Productos destacados</h2><p>Selección de tecnología para trabajo, estudio y entretenimiento.</p></div></div>
+  <div class="categories">
+    <button class="cat" onclick="filterCategory('all')">⚡ Todo</button>
+    <button class="cat" onclick="filterCategory('computadores')">💻 Computadores</button>
+    <button class="cat" onclick="filterCategory('celulares')">📱 Celulares</button>
+    <button class="cat" onclick="filterCategory('perifericos')">⌨️ Accesorios</button>
+    <button class="cat" onclick="filterCategory('gaming')">🎮 Gaming</button>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div id="products" class="products"></div>
+  <div class="note" style="margin-top:20px">Proyecto académico: TecnoNova Store es una empresa ficticia. Los productos y marcas son reales; los precios corresponden a la simulación comercial de la empresa.</div>
+</section>
+
+
+<section class="institutional" id="nosotros">
+  <div class="institutional-wrap">
+    <div class="institutional-head">
+      <div class="eyebrow">Conoce TecnoNova</div>
+      <h2>Quiénes somos</h2>
+      <p>Una empresa enfocada en acercar la tecnología a personas y organizaciones mediante productos de calidad y una atención confiable.</p>
+    </div>
+    <div class="institutional-grid">
+      <article class="institutional-card">
+        <div class="icon">🎯</div>
+        <h3>Misión</h3>
+        <p>Ofrecer productos tecnológicos de calidad y soluciones informáticas accesibles para personas y empresas, brindando una atención confiable, ágil y personalizada. Buscamos satisfacer las necesidades de nuestros clientes mediante una oferta variada, un servicio responsable y procesos eficientes, generando valor para clientes, colaboradores y socios.</p>
+      </article>
+      <article class="institutional-card">
+        <div class="icon">🚀</div>
+        <h3>Visión</h3>
+        <p>Para el año 2030, TecnoNova Ltda. busca consolidarse como una empresa reconocida en Santa Marta y la región Caribe por la calidad de sus productos, la confianza de sus clientes y la eficiencia de sus servicios, ampliando progresivamente su oferta tecnológica y fortaleciendo su presencia en el mercado.</p>
+      </article>
+      <article class="institutional-card">
+        <div class="icon">📈</div>
+        <h3>Objetivo general</h3>
+        <p>Consolidar a TecnoNova Ltda. como una empresa competitiva en la comercialización de productos tecnológicos en Santa Marta y la región Caribe, ofreciendo productos de calidad y un servicio eficiente que permita satisfacer las necesidades de sus clientes y generar rentabilidad sostenible.</p>
+      </article>
+    </div>
+    <div class="objectives">
+      <h3>Objetivos específicos</h3>
+      <ol>
+        <li>Incrementar las ventas mediante la comercialización de computadores, periféricos, componentes y demás productos tecnológicos.</li>
+        <li>Mantener un inventario eficiente, procurando atender la demanda sin generar acumulaciones innecesarias.</li>
+        <li>Brindar un servicio al cliente de calidad, ofreciendo atención oportuna y soluciones acordes con sus necesidades.</li>
+        <li>Establecer relaciones comerciales sólidas con proveedores y clientes.</li>
+        <li>Controlar adecuadamente los recursos financieros y operativos de la empresa.</li>
+        <li>Fortalecer la presencia digital mediante la comercialización de productos a través de canales digitales.</li>
+        <li>Generar rentabilidad y crecimiento sostenible, aumentando progresivamente la capacidad operativa de TecnoNova Ltda.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-wrap">
+    <div><strong>TecnoNova Store</strong><br>Tu tienda de tecnología.</div>
+    <div>© 2026 TecnoNova Store · Proyecto académico</div>
+  </div>
+</footer>
+
+<div id="cartOverlay" class="overlay" onclick="if(event.target===this)closeCart()">
+  <aside class="drawer">
+    <div class="drawer-head"><h2 style="margin:0">🛒 Carrito</h2><button class="close" onclick="closeCart()">✕</button></div>
+    <div id="cartList" class="cart-list"></div>
+    <div class="cart-foot"><div class="total"><span>Total</span><span id="cartTotal">$0</span></div><button class="checkout" onclick="openCheckout()">Continuar compra</button></div>
+  </aside>
+</div>
+
+<div id="detailModal" class="modal">
+  <div class="modal-card">
+    <button class="close" style="float:right" onclick="closeDetail()">✕</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<div id="checkoutModal" class="modal">
+  <div class="modal-card">
+    <h2>Finalizar compra</h2>
+    <p style="color:var(--muted)">Esta compra es una simulación académica.</p>
+    <form id="checkoutForm" class="form">
+      <div><label>Nombre completo</label><input id="customerName" required></div>
+      <div><label>Correo electrónico</label><input id="customerEmail" type="email" required></div>
+      <div><label>Teléfono</label><input id="customerPhone" required></div>
+      <div><label>Dirección de entrega</label><input id="customerAddress" required></div>
+      <div><label>Forma de pago</label><select id="payment" required><option value="">Selecciona...</option><option>Transferencia bancaria</option><option>Tarjeta de crédito</option><option>Tarjeta débito</option><option>Pago contra entrega</option></select></div>
+      <div class="actions"><button type="button" class="cancel" onclick="closeCheckout()">Cancelar</button><button class="confirm">Confirmar pedido</button></div>
+    </form>
+  </div>
+</div>
+
+<script>
+const products=[
+{code:"TEC-001",brand:"Lenovo",name:"IdeaPad Slim 3 15.6”",price:3846154,category:"computadores",spec:"Ryzen 5 · 8 GB RAM · SSD 512 GB · FHD",img:"https://media.falabella.com/falabellaPE/150404272_01/w%3D1500%2Ch%3D1500%2Cfit%3Dcover"},
+{code:"TEC-002",brand:"HP",name:"All-in-One 23.8”",price:3384615,category:"computadores",spec:"23.8” FHD · Intel Core i3 · 8 GB RAM · SSD 256 GB",img:"https://m.media-amazon.com/images/I/719h4SaKtpL._AC_SL1500_.jpg"},
+{code:"TEC-003",brand:"LG",name:"24MR400-B 24”",price:1000000,category:"computadores",spec:"24” · Full HD · IPS · 100 Hz",img:"https://media.icdn.hu/product/2023-11/948319/3115122_lg-24mr400-b.webp"},
+{code:"TEC-004",brand:"Epson",name:"EcoTank L3210",price:1307692,category:"perifericos",spec:"Multifuncional · Impresión, copia y escaneo · Sistema EcoTank",img:"https://shop.epson.com.co/media/catalog/product/e/p/eps0002248_1.jpg"},
+{code:"TEC-005",brand:"Logitech",name:"MK270 Wireless",price:230769,category:"perifericos",spec:"Combo teclado + mouse inalámbrico · USB",img:"https://casaroyal.vtexassets.com/arquivos/ids/157881-800-800?aspect=true&height=800&v=638775601647200000&width=800"},
+{code:"TEC-006",brand:"Xiaomi",name:"Redmi 15 8 GB / 256 GB",price:1846154,category:"celulares",spec:"8 GB RAM · 256 GB · Pantalla de gran formato",img:"https://www.m-m-c.ba/6897-large_default/xiaomi-redmi-15-8gb256gb-black.jpg"},
+{code:"TEC-007",brand:"Logitech",name:"C920s Pro HD",price:430769,category:"perifericos",spec:"Full HD 1080p · Micrófonos estéreo · Tapa de privacidad",img:"https://assets.1.commercebuild.com/a977f7602289f64e72377167a4d54382/contents/LOG960001257/LOG960001257.png"},
+{code:"TEC-008",brand:"Sony",name:"PlayStation 5 Slim",price:3846154,category:"gaming",spec:"Consola PS5 · SSD · Incluye control DualSense",img:"https://di2ponv0v5otw.cloudfront.net/posts/2025/11/01/690691c12fa054ad1f0edbf5/m_690691c624b20bb2a618cd43.jpg"},
+{code:"TEC-009",brand:"Xiaomi",name:"Redmi Watch 5 Active",price:692308,category:"celulares",spec:"Pantalla 2” · Bluetooth 5.3 · Diseño deportivo",img:"https://www.dokkantech.com/cdn/shop/files/Xiaomi_Redmi_Watch_5_Active_Smartwatch_With_2_Inch_Display_Bluetooth_5.3_2.png?v=1731263786&width=1214"},
+{code:"TEC-010",brand:"HP",name:"150A LaserJet (W1500A)",price:276923,category:"perifericos",spec:"Tóner negro original · LaserJet · Rendimiento estándar",img:"https://bf1af2.a-cdn.akinoncloud.com/products/2024/09/06/37683/a7eb460f-2559-430d-9071-708e4ed6cea8_size3840_cropCenter.jpg"}
+];
+
+let cart=JSON.parse(localStorage.getItem("tn_cart")||"[]"), currentCategory="all";
+const money=n=>new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(n);
+
+function renderProducts(){
+ const q=(document.getElementById("search").value||"").toLowerCase();
+ const list=products.filter(p=>(currentCategory==="all"||p.category===currentCategory)&&(`${p.brand} ${p.name} ${p.code} ${p.spec}`).toLowerCase().includes(q));
+ document.getElementById("products").innerHTML=list.map(p=>`
+ <article class="card">
+   <div class="imgbox"><span class="badge">Disponible</span><img src="${p.img}" alt="${p.brand} ${p.name}" loading="lazy" onerror="this.style.display='none'"></div>
+   <div class="info">
+     <div class="brand">${p.brand}</div><h3>${p.name}</h3><div class="spec">${p.spec}</div>
+     <div class="price">${money(p.price)}</div><div class="old">${p.code}</div>
+     <div class="card-actions"><button class="detail" onclick="showDetail('${p.code}')">Ver</button><button class="buy" onclick="add('${p.code}')">Agregar al carrito</button></div>
+   </div>
+ </article>`).join("")||'<div style="grid-column:1/-1;text-align:center;padding:50px;color:#667085">No encontramos productos con esa búsqueda.</div>';
+}
+function filterProducts(){renderProducts()}
+function filterCategory(c){currentCategory=c;document.getElementById("search").value="";renderProducts();document.getElementById("catalogo").scrollIntoView({behavior:"smooth"})}
+function add(code){const x=cart.find(i=>i.code===code);x?x.qty++:cart.push({code,qty:1});save();openCart()}
+function save(){localStorage.setItem("tn_cart",JSON.stringify(cart));renderCart()}
+function renderCart(){
+ const count=cart.reduce((s,i)=>s+i.qty,0);document.getElementById("cartCount").textContent=count;
+ const box=document.getElementById("cartList");
+ if(!cart.length){box.innerHTML='<div class="empty">Tu carrito está vacío.<br><br>Agrega productos para comenzar.</div>';document.getElementById("cartTotal").textContent=money(0);return}
+ let total=0;
+ box.innerHTML=cart.map(i=>{const p=products.find(x=>x.code===i.code),sub=p.price*i.qty;total+=sub;return `<div class="cart-item"><div class="cart-top"><div class="cart-name">${p.brand} ${p.name}</div><button class="remove" onclick="removeItem('${p.code}')">Eliminar</button></div><div style="font-size:13px;color:#667085">${money(p.price)} c/u</div><div class="qty"><button onclick="qty('${p.code}',-1)">−</button><b>${i.qty}</b><button onclick="qty('${p.code}',1)">+</button><strong style="margin-left:auto">${money(sub)}</strong></div></div>`}).join("");
+ document.getElementById("cartTotal").textContent=money(total)
+}
+function qty(code,d){const i=cart.find(x=>x.code===code);if(!i)return;i.qty+=d;if(i.qty<1)cart=cart.filter(x=>x.code!==code);save()}
+function removeItem(code){cart=cart.filter(x=>x.code!==code);save()}
+function openCart(){renderCart();document.getElementById("cartOverlay").classList.add("open")}
+function closeCart(){document.getElementById("cartOverlay").classList.remove("open")}
+function showDetail(code){const p=products.find(x=>x.code===code);document.getElementById("detailContent").innerHTML=`<div class="product-detail"><img src="${p.img}" alt="${p.brand} ${p.name}"><div><div class="brand">${p.brand}</div><h2>${p.name}</h2><p style="color:#667085">${p.spec}</p><div class="price">${money(p.price)}</div><p style="font-size:13px;color:#667085">Referencia: ${p.code}</p><button class="buy" style="width:100%;margin-top:15px" onclick="add('${p.code}');closeDetail()">Agregar al carrito</button></div></div>`;document.getElementById("detailModal").classList.add("open")}
+function closeDetail(){document.getElementById("detailModal").classList.remove("open")}
+function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}closeCart();document.getElementById("checkoutModal").classList.add("open")}
+function closeCheckout(){document.getElementById("checkoutModal").classList.remove("open")}
+document.getElementById("checkoutForm").addEventListener("submit",e=>{e.preventDefault();const n=document.getElementById("customerName").value;const order="TN-"+Date.now().toString().slice(-6);alert(`Pedido ${order} registrado para ${n}. Esta compra es una simulación académica.`);cart=[];save();e.target.reset();closeCheckout()});
+renderProducts();renderCart();
+</script>
+</body>
+</html>
