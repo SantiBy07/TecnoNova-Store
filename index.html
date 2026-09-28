@@ -125,7 +125,6 @@ footer strong{color:#fff}
 @media(max-width:720px){.logo-image{width:145px;height:52px}.benefits-wrap{grid-template-columns:1fr 1fr}}
 @media(max-width:470px){.benefits-wrap{grid-template-columns:1fr}.logo-image{width:132px;height:48px}}
 
-
 /* Sección institucional */
 .institutional{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .institutional-wrap{max-width:1240px;margin:auto;padding:55px 20px}
@@ -143,7 +142,6 @@ footer strong{color:#fff}
 .objectives p{color:#475467;line-height:1.7;font-size:14px}
 .objectives ol{margin:12px 0 0;padding-left:22px;color:#475467;line-height:1.7;font-size:14px}
 @media(max-width:800px){.institutional-grid{grid-template-columns:1fr}}
-
 </style>
 </head>
 <body>
@@ -199,7 +197,6 @@ footer strong{color:#fff}
   <div id="products" class="products"></div>
   <div class="note" style="margin-top:20px">Proyecto académico: TecnoNova Store es una empresa ficticia. Los productos y marcas son reales; los precios corresponden a la simulación comercial de la empresa.</div>
 </section>
-
 
 <section class="institutional" id="nosotros">
   <div class="institutional-wrap">
@@ -271,9 +268,77 @@ footer strong{color:#fff}
       <div><label>Correo electrónico</label><input id="customerEmail" type="email" required></div>
       <div><label>Teléfono</label><input id="customerPhone" required></div>
       <div><label>Dirección de entrega</label><input id="customerAddress" required></div>
-      <div><label>Forma de pago</label><select id="payment" required><option value="">Selecciona...</option><option>Transferencia bancaria</option><option>Tarjeta de crédito</option><option>Tarjeta débito</option><option>Pago contra entrega</option></select></div>
-      <div class="actions"><button type="button" class="cancel" onclick="closeCheckout()">Cancelar</button><button class="confirm">Confirmar pedido</button></div>
+      <div>
+        <label>Forma de pago</label>
+        <select id="payment" required>
+          <option value="">Selecciona...</option>
+          <option>Transferencia bancaria</option>
+          <option>Tarjeta de crédito</option>
+          <option>Tarjeta débito</option>
+          <option>Pago contra entrega</option>
+        </select>
+      </div>
+      <div class="actions">
+        <button type="button" class="cancel" onclick="closeCheckout()">Cancelar</button>
+        <button class="confirm">Confirmar pedido</button>
+      </div>
     </form>
+  </div>
+</div>
+
+<!-- VENTANA DE TARJETA -->
+<div id="modalTarjeta" class="modal" style="z-index: 130;">
+  <div class="modal-card" style="width: min(380px, 100%);">
+    <button class="close" style="float:right" onclick="document.getElementById('modalTarjeta').classList.remove('open')">✕</button>
+    <h2 style="margin-top: 0; margin-bottom: 5px;">Datos de la Tarjeta</h2>
+    <p style="color:var(--muted); font-size: 13px; margin-top: 0; margin-bottom: 20px;">Simulación de pago seguro</p>
+    <div class="form">
+      <div>
+        <label>Número de la tarjeta</label>
+        <input type="text" id="tarjeta-numero" placeholder="0000 0000 0000 0000" maxlength="19">
+      </div>
+      <div style="display: flex; gap: 15px;">
+        <div style="flex: 1;">
+          <label>Vencimiento</label>
+          <input type="text" id="tarjeta-fecha" placeholder="MM/AA" maxlength="5">
+        </div>
+        <div style="flex: 1;">
+          <label>CVV</label>
+          <input type="text" placeholder="123" maxlength="3">
+        </div>
+      </div>
+      <div>
+        <label>Nombre en la tarjeta</label>
+        <input type="text" placeholder="Nombre completo">
+      </div>
+      <button type="button" class="confirm" style="margin-top: 15px; width: 100%;" id="btnGuardarTarjeta">Aceptar datos</button>
+    </div>
+  </div>
+</div>
+
+<!-- NUEVA VENTANA DE TRANSFERENCIA / PSE -->
+<div id="modalTransferencia" class="modal" style="z-index: 130;">
+  <div class="modal-card" style="width: min(380px, 100%); text-align: center;">
+    <button class="close" style="float:right" onclick="document.getElementById('modalTransferencia').classList.remove('open')">✕</button>
+    <h2 style="margin-top: 0; margin-bottom: 5px;">Transferencia o PSE</h2>
+    <p style="color:var(--muted); font-size: 13px; margin-top: 0; margin-bottom: 20px;">Escanea el código para simular el pago</p>
+
+    <!-- Recuadro visual simulando un QR -->
+    <div style="background: #f7f8fa; padding: 25px 20px; border-radius: 12px; margin-bottom: 20px; border: 2px dashed #d0d5dd;">
+      <div style="font-size: 60px; line-height: 1;">📱</div>
+      <p style="font-weight: 800; font-size: 16px; margin: 12px 0 5px;">[ Código QR Ficticio ]</p>
+      <p style="font-size: 12px; color: var(--muted); margin: 0;">Simulación de pasarela de pago</p>
+    </div>
+
+    <!-- Datos manuales -->
+    <div style="text-align: left; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 8px; font-size: 13px; margin-bottom: 20px; line-height: 1.6;">
+      <strong style="color: #027a48; display: block; margin-bottom: 8px;">💳 Datos para transferencia manual:</strong>
+      <b>Banco:</b> Bancolombia / Nequi<br>
+      <b>Cuenta de Ahorros:</b> 000-111-222-33<br>
+      <b>NIT:</b> 900.123.456-7 (TecnoNova Ltda.)
+    </div>
+
+    <button type="button" class="confirm" style="width: 100%;" onclick="document.getElementById('modalTransferencia').classList.remove('open')">Simular pago realizado</button>
   </div>
 </div>
 
@@ -327,6 +392,43 @@ function showDetail(code){const p=products.find(x=>x.code===code);document.getEl
 function closeDetail(){document.getElementById("detailModal").classList.remove("open")}
 function openCheckout(){if(!cart.length){alert("Agrega al menos un producto.");return}closeCart();document.getElementById("checkoutModal").classList.add("open")}
 function closeCheckout(){document.getElementById("checkoutModal").classList.remove("open")}
+
+const paymentSelect = document.getElementById("payment");
+const modalTarjeta = document.getElementById("modalTarjeta");
+const btnGuardarTarjeta = document.getElementById("btnGuardarTarjeta");
+const modalTransferencia = document.getElementById("modalTransferencia");
+
+// Formateo de los campos de la tarjeta
+const inputNumero = document.getElementById("tarjeta-numero");
+const inputFecha = document.getElementById("tarjeta-fecha");
+
+inputNumero.addEventListener("input", function (e) {
+  let valor = e.target.value.replace(/\D/g, "");
+  valor = valor.replace(/(\d{4})(?=\d)/g, "$1 ");
+  e.target.value = valor;
+});
+
+inputFecha.addEventListener("input", function (e) {
+  let valor = e.target.value.replace(/\D/g, "");
+  if (valor.length > 2) {
+    valor = valor.substring(0, 2) + "/" + valor.substring(2, 4);
+  }
+  e.target.value = valor;
+});
+
+// Escuchar cambios en la forma de pago (AHORA INCLUYE TRANSFERENCIA)
+paymentSelect.addEventListener("change", (e) => {
+  if (e.target.value === "Tarjeta de crédito" || e.target.value === "Tarjeta débito") {
+    modalTarjeta.classList.add("open");
+  } else if (e.target.value === "Transferencia bancaria") {
+    modalTransferencia.classList.add("open");
+  }
+});
+
+btnGuardarTarjeta.addEventListener("click", () => {
+  modalTarjeta.classList.remove("open");
+});
+
 document.getElementById("checkoutForm").addEventListener("submit",e=>{e.preventDefault();const n=document.getElementById("customerName").value;const order="TN-"+Date.now().toString().slice(-6);alert(`Pedido ${order} registrado para ${n}. Esta compra es una simulación académica.`);cart=[];save();e.target.reset();closeCheckout()});
 renderProducts();renderCart();
 </script>
